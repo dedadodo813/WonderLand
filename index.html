@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- 🔹 SEO & Social Meta Tags -->
+  <title>WonderLand Nursery - تسجيل الأطفال | أكاديمية وندرلاند</title>
+  <meta name="description" content="سجل طفلك الآن في أكاديمية وندرلاند للحضانة - بيئة آمنة ومحببة للنمو والتعليم المبكر">
+  <meta name="keywords" content="حضانة, أطفال, تسجيل, وندرلاند, تعليم مبكر, القاهرة, مصر">
+  <meta name="author" content="WonderLand Nursery">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WonderLand Nursery - سجل طفلك الآن">
+  <meta property="og:description" content="أكاديمية وندرلاند: بيئة آمنة ومحببة لنمو طفلك">
+  <meta property="og:url" content="https://YOUR_USERNAME.github.io/wonderland-nursery-form/">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630/FF6B6B/ffffff?text=WonderLand+Nursery">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WonderLand Nursery - تسجيل الأطفال">
+  <meta name="twitter:description" content="سجل طفلك في بيئة تعليمية محببة وآمنة">
+  
+  <!-- 🔹 فافيكون -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎠</text></svg>">
+  
+  <!-- 🔹 المكتبات الخارجية -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+  <style>
+    :root {
+      --primary: #FF6B6B;    /* Coral */
+      --secondary: #4ECDC4;  /* Turquoise */
+      --accent: #FFE66D;     /* Yellow */
+      --bg: #F7FFF7;         /* Soft White Green */
+      --text: #2F3E46;
+      --card: #ffffff;
+      --error: #ef4444;
+      --success: #10b981;
+      --facebook: #1877F2;
+      --maps: #4285F4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    
+    body { 
+      background: var(--bg);       background-image: radial-gradient(var(--secondary) 0.5px, transparent 0.5px);
+      background-size: 30px 30px;
+      color: var(--text); 
+      padding: 20px; 
+      line-height: 1.6;
+    }
+
+    .container { 
+      max-width: 700px; 
+      margin: 0 auto; 
+      background: var(--card); 
+      padding: 30px; 
+      border-radius: 25px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-top: 10px solid var(--primary);
+    }
+
+    /* 🔹 Header & Social Links */
+    .header { text-align: center; margin-bottom: 25px; position: relative; padding-top: 10px; }
+    .header h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 5px; font-weight: 800; }
+    .header p { color: #666; font-size: 0.95rem; margin-bottom: 15px; }
+    
+    .social-links { 
+      display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; 
+      margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 12px;
+    }
+    .social-btn { 
+      display: flex; align-items: center; gap: 6px; padding: 8px 16px; 
+      border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+      transition: all 0.3s; border: 2px solid transparent;
+    }
+    .social-btn.facebook { background: var(--facebook); color: white; }
+    .social-btn.maps { background: var(--maps); color: white; }
+    .social-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .social-btn svg { width: 16px; height: 16px; }
+
+    .lang-btn { 
+      position: absolute; top: 5px; left: 0;
+      padding: 6px 16px; border: 2px solid var(--secondary); background: white; 
+      color: var(--secondary); border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+      transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .lang-btn:hover { background: var(--secondary); color: white; transform: translateY(-2px); }
+
+    /* 🔹 Progress Bar */
+    .progress-container { margin-bottom: 30px; display: flex; justify-content: space-between; position: relative; }
+    .progress-bar { position: absolute; top: 50%; left: 0; height: 4px; background: #eee; width: 100%; z-index: 1; transform: translateY(-50%); border-radius: 2px; }
+    .progress-fill { position: absolute; top: 50%; left: 0; height: 4px; background: var(--secondary); width: 0%; z-index: 1; transform: translateY(-50%); transition: width 0.4s ease; border-radius: 2px; }
+    .circle { width: 35px; height: 35px; background: #fff; border: 3px solid #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease; color: #999; }
+    .circle.active { border-color: var(--secondary); background: var(--secondary); color: white; box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.2); }
+    /* 🔹 Form Steps */
+    .step { display: none; }
+    .step.active { display: block; animation: slideIn 0.4s ease-out; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+    .step-title { font-size: 1.3rem; margin-bottom: 22px; color: var(--secondary); display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    
+    .field { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.92rem; color: #444; }
+    .req { color: var(--error); margin-right: 3px; }
+    [dir="ltr"] .req { margin-right: 0; margin-left: 3px; }
+    
+    input, select, textarea { 
+      width: 100%; padding: 13px; border: 2px solid #f0f0f0; border-radius: 12px; 
+      font-size: 15px; transition: all 0.3s; background: #fafafa; color: var(--text);
+    }
+    input:focus, select:focus, textarea:focus { 
+      outline: none; border-color: var(--secondary); background: #fff; 
+      box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.15); 
+    }
+    input[readonly] { background: #f0fdfa; color: var(--secondary); font-weight: 600; cursor: default; }
+
+    .nav { display: flex; justify-content: space-between; margin-top: 35px; gap: 12px; }
+    .btn { padding: 13px 32px; border: none; border-radius: 12px; cursor: pointer; font-weight: 700; transition: all 0.3s; font-size: 0.95rem; }
+    .btn-next { background: var(--secondary); color: white; }
+    .btn-prev { background: #f0f0f0; color: #777; }
+    .btn-submit { background: var(--primary); color: white; width: 100%; font-size: 1.1rem; padding: 15px; margin-top: 10px; }
+    .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.15); opacity: 0.95; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    canvas { border: 2px dashed var(--secondary); border-radius: 12px; width: 100%; height: 160px; background: #fff; cursor: crosshair; touch-action: none; }
+    
+    .check-box { 
+      display: flex; align-items: flex-start; gap: 12px; padding: 15px; 
+      background: #f9f9f9; border-radius: 12px; margin-bottom: 12px; cursor: pointer;
+      transition: all 0.2s; border: 2px solid transparent;
+    }
+    .check-box:hover { background: #f0fdfa; border-color: var(--secondary); }
+    .check-box input { width: auto; margin-top: 3px; transform: scale(1.1); accent-color: var(--secondary); }
+
+    .helper { font-size: 0.82rem; color: #888; margin-top: 4px; }
+    
+    .success-msg { 
+      display: none; text-align: center; padding: 20px; background: #d1fae5; 
+      border-radius: 12px; color: #065f46; margin-top: 20px; border: 2px solid var(--success);
+    }
+
+    /* 🔹 Footer with Contact Info */
+    .footer {       margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; 
+      text-align: center; font-size: 0.9rem; color: #666;
+    }
+    .footer a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* 🔹 RTL/LTR Adjustments */
+    [dir="rtl"] .lang-btn { left: 0; right: auto; }
+    [dir="ltr"] .lang-btn { right: 0; left: auto; }
+    [dir="rtl"] .check-box { flex-direction: row; }
+    [dir="ltr"] .check-box { flex-direction: row-reverse; }
+
+    @media (max-width: 600px) { 
+      .container { padding: 20px; border-radius: 20px; }
+      h1 { font-size: 1.5rem; }
+      .step-title { font-size: 1.15rem; }
+      .btn { padding: 11px 24px; font-size: 0.9rem; }
+      .circle { width: 30px; height: 30px; font-size: 0.8rem; }
+      .social-links { flex-direction: column; align-items: center; }
+      .social-btn { width: 100%; max-width: 280px; justify-content: center; }
+    }
+
+    /* 🔹 Print/PDF Styles */
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; border: none; padding: 20px; }
+      .nav, .lang-btn, .social-links, .check-box input { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">English</button>
+
+<div class="container">
+  <div class="header">
+    <h1>🎠 WonderLand</h1>
+    <p data-i18n="subtitle">Nursery & Kids Academy</p>
+    
+    <!-- 🔹 Social & Location Links -->
+    <div class="social-links">
+      <a href="https://www.facebook.com/share/1DVNmrvTUs/" target="_blank" rel="noopener" class="social-btn facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.315 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span data-i18n="fb_link">تابعنا على فيسبوك</span>
+      </a>
+      <a href="https://maps.app.goo.gl/zmoaQUtjm32g4kSi8" target="_blank" rel="noopener" class="social-btn maps">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span data-i18n="maps_link">موقعنا على الخريطة</span>
+      </a>
+    </div>  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+    <div class="progress-fill" id="progressFill"></div>
+    <div class="circle active">1</div>
+    <div class="circle">2</div>
+    <div class="circle">3</div>
+    <div class="circle">4</div>
+    <div class="circle">5</div>
+    <div class="circle">6</div>
+  </div>
+
+  <form id="regForm" onsubmit="return false;">
+    <!-- Step 1: Child Info -->
+    <div class="step active" data-step="1">
+      <h2 class="step-title">👶 <span data-i18n="step1">بيانات الطفل</span></h2>
+      <div class="field">
+        <label><span data-i18n="fullname">الاسم بالكامل</span> <span class="req">*</span></label>
+        <input type="text" required name="child_fullname" data-i18n-placeholder="ph_fullname" placeholder="أدخل اسم الطفل بالكامل">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div class="field">
+          <label><span data-i18n="gender">الجنس</span> <span class="req">*</span></label>
+          <select required name="gender">
+            <option value="" data-i18n="sel_gender">اختر</option>
+            <option value="Male" data-i18n="male">ذكر</option>
+            <option value="Female" data-i18n="female">أنثى</option>
+          </select>
+        </div>
+        <div class="field">
+          <label><span data-i18n="dob">تاريخ الميلاد</span> <span class="req">*</span></label>
+          <input type="date" required name="dob" id="dobInput">
+        </div>
+      </div>
+      <div class="field">
+        <label data-i18n="age">العمر</label>
+        <input type="text" id="ageOutput" readonly data-i18n-placeholder="ph_age" placeholder="يُحسب تلقائياً">
+      </div>
+      <div class="field">
+        <label data-i18n="nationality">الجنسية</label>
+        <input type="text" name="nationality" data-i18n-placeholder="ph_nationality" placeholder="مثال: مصري">
+      </div>
+    </div>
+
+    <!-- Step 2: Parents -->
+    <div class="step" data-step="2">
+      <h2 class="step-title">👪 <span data-i18n="step2">بيانات الوالدين</span></h2>
+      <div class="field">        <label><span data-i18n="mother_name">اسم الأم بالكامل</span> <span class="req">*</span></label>
+        <input type="text" required name="mother_name" data-i18n-placeholder="ph_mother_name" placeholder="الاسم الكامل">
+      </div>
+      <div class="field">
+        <label><span data-i18n="mother_phone">رقم هاتف الأم</span> <span class="req">*</span></label>
+        <input type="tel" required name="mother_phone" pattern="[0-9]{11}" data-i18n-placeholder="ph_phone" placeholder="01xxxxxxxxx">
+        <div class="helper" data-i18n="phone_helper">11 رقم (مثال: 01012345678)</div>
+      </div>
+      <hr style="margin: 22px 0; border: 0; border-top: 1px dashed #ddd;">
+      <div class="field">
+        <label><span data-i18n="father_name">اسم الأب بالكامل</span> <span class="req">*</span></label>
+        <input type="text" required name="father_name" data-i18n-placeholder="ph_father_name" placeholder="الاسم الكامل">
+      </div>
+      <div class="field">
+        <label><span data-i18n="father_phone">رقم هاتف الأب</span> <span class="req">*</span></label>
+        <input type="tel" required name="father_phone" pattern="[0-9]{11}" data-i18n-placeholder="ph_phone" placeholder="01xxxxxxxxx">
+      </div>
+    </div>
+
+    <!-- Step 3: Medical -->
+    <div class="step" data-step="3">
+      <h2 class="step-title">🏥 <span data-i18n="step3">المعلومات الطبية</span></h2>
+      <div class="field">
+        <label data-i18n="allergies">هل يعاني من حساسية؟</label>
+        <textarea name="allergies" rows="2" data-i18n-placeholder="ph_allergies" placeholder="اذكر أي حساسية أو قيود غذائية"></textarea>
+      </div>
+      <div class="field">
+        <label data-i18n="meds">أدوية يتناولها بانتظام</label>
+        <textarea name="meds" rows="2" data-i18n-placeholder="ph_meds" placeholder="اسم الدواء والجرعة"></textarea>
+      </div>
+      <div class="field">
+        <label data-i18n="doctor">طبيب الطفل (الاسم والهاتف)</label>
+        <input type="text" name="doctor" data-i18n-placeholder="ph_doctor" placeholder="د. أحمد - 01012345678">
+      </div>
+    </div>
+
+    <!-- Step 4: Emergency -->
+    <div class="step" data-step="4">
+      <h2 class="step-title">🚨 <span data-i18n="step4">اتصالات الطوارئ</span></h2>
+      <p class="helper" style="margin-bottom: 15px;" data-i18n="em_info">شخص آخر يمكن الاتصال به في حال عدم الرد</p>
+      <div class="field">
+        <label><span data-i18n="em1_name">الاسم</span> <span class="req">*</span></label>
+        <input type="text" required name="em1_name" data-i18n-placeholder="ph_em_name" placeholder="الاسم الكامل">
+      </div>
+      <div class="field">
+        <label><span data-i18n="em1_rel">صلة القرابة</span> <span class="req">*</span></label>
+        <input type="text" required name="em1_rel" data-i18n-placeholder="ph_em_rel" placeholder="مثال: جدة، خال">
+      </div>
+      <div class="field">
+        <label><span data-i18n="em1_phone">رقم الهاتف</span> <span class="req">*</span></label>        <input type="tel" required name="em1_phone" pattern="[0-9]{11}" data-i18n-placeholder="ph_phone" placeholder="01xxxxxxxxx">
+      </div>
+    </div>
+
+    <!-- Step 5: Permissions & Signature -->
+    <div class="step" data-step="5">
+      <h2 class="step-title">📸 <span data-i18n="step5">الأذونات والتوقيع</span></h2>
+      <label class="check-box">
+        <input type="checkbox" name="photo_perm">
+        <span data-i18n="perm_photo">أوافق على تصوير الطفل في الأنشطة الداخلية</span>
+      </label>
+      <label class="check-box">
+        <input type="checkbox" name="med_perm">
+        <span data-i18n="perm_med">أوافق على الإسعافات الأولية في الطوارئ</span>
+      </label>
+      <div class="field" style="margin-top:22px;">
+        <label><span data-i18n="signature">التوقيع الرقمي للولي</span> <span class="req">*</span></label>
+        <canvas id="sigCanvas"></canvas>
+        <button type="button" onclick="signaturePad.clear()" style="background:none; border:none; color:var(--primary); cursor:pointer; font-size:0.85rem; margin-top:8px; font-weight:600;" data-i18n="clear_sig">🗑️ مسح التوقيع</button>
+      </div>
+    </div>
+
+    <!-- Step 6: Finalize -->
+    <div class="step" data-step="6">
+      <h2 class="step-title">✨ <span data-i18n="step6">تأكيد التسجيل</span></h2>
+      <div class="field">
+        <label><span data-i18n="plan">الباقة المختارة</span> <span class="req">*</span></label>
+        <select required name="plan">
+          <option value="" data-i18n="sel_plan">اختر باقة</option>
+          <option value="Full Day" data-i18n="plan_full">يوم كامل (8 ص - 6 م)</option>
+          <option value="Half Day" data-i18n="plan_half">نصف يوم (8 ص - 2 م)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="notes">ملاحظات إضافية</label>
+        <textarea name="notes" rows="2" data-i18n-placeholder="ph_notes" placeholder="أي معلومات تود إخبارنا بها..."></textarea>
+      </div>
+      <label class="check-box" style="border: 2px solid var(--secondary); background: #f0fdfa;">
+        <input type="checkbox" required name="agree">
+        <span><span data-i18n="agree">أقر بصحة البيانات وبموافقتي على سياسة الحضانة</span> <span class="req">*</span></span>
+      </label>
+      
+      <button type="button" class="btn btn-submit" onclick="submitForm()" id="submitBtn" data-i18n="submit">🎯 إتمام التسجيل وإرسال (PDF)</button>
+      <div class="success-msg" id="successMsg" data-i18n="success">✅ تم تحميل الملف! سيتم فتح الواتساب لإرساله.</div>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-prev" id="prevBtn" onclick="changeStep(-1)" disabled data-i18n="prev">⬅️ السابق</button>
+      <button type="button" class="btn btn-next" id="nextBtn" onclick="changeStep(1)" data-i18n="next">التالي ➡️</button>
+    </div>  </form>
+
+  <!-- 🔹 Footer with Contact -->
+  <div class="footer">
+    <p data-i18n="footer_text">للاستفسار: تواصل معنا عبر فيسبوك أو زرنا في مقرنا</p>
+    <p style="margin-top:8px;">
+      <a href="https://www.facebook.com/share/1DVNmrvTUs/" target="_blank" rel="noopener">Facebook</a> • 
+      <a href="https://maps.app.goo.gl/zmoaQUtjm32g4kSi8" target="_blank" rel="noopener">Google Maps</a>
+    </p>
+    <p style="margin-top:12px; font-size:0.8rem; color:#999;" data-i18n="copyright">© 2026 WonderLand Nursery. All rights reserved.</p>
+  </div>
+</div>
+
+<script>
+  // 🔹 Configuration
+  let currentLang = 'ar';
+  let currentStep = 1;
+  const totalSteps = 6;
+  const nurseryPhone = "201000000000"; // ⚠️ ضع رقم الواتساب الدولي هنا (بدون +)
+
+  // 🔹 Translations
+  const i18n = {
+    ar: {
+      subtitle: "أكاديمية وندرلاند للأطفال",
+      fb_link: "تابعنا على فيسبوك", maps_link: "موقعنا على الخريطة",
+      step1: "بيانات الطفل", fullname: "الاسم بالكامل", ph_fullname: "أدخل اسم الطفل بالكامل",
+      gender: "الجنس", sel_gender: "اختر", male: "ذكر", female: "أنثى",
+      dob: "تاريخ الميلاد", age: "العمر", ph_age: "يُحسب تلقائياً",
+      nationality: "الجنسية", ph_nationality: "مثال: مصري",
+      step2: "بيانات الوالدين", mother_name: "اسم الأم بالكامل", ph_mother_name: "الاسم الكامل",
+      mother_phone: "رقم هاتف الأم", father_name: "اسم الأب بالكامل", ph_father_name: "الاسم الكامل",
+      father_phone: "رقم هاتف الأب", ph_phone: "01xxxxxxxxx", phone_helper: "11 رقم (مثال: 01012345678)",
+      step3: "المعلومات الطبية", allergies: "هل يعاني من حساسية؟", ph_allergies: "اذكر أي حساسية أو قيود غذائية",
+      meds: "أدوية يتناولها بانتظام", ph_meds: "اسم الدواء والجرعة",
+      doctor: "طبيب الطفل (الاسم والهاتف)", ph_doctor: "د. أحمد - 01012345678",
+      step4: "اتصالات الطوارئ", em_info: "شخص آخر يمكن الاتصال به في حال عدم الرد",
+      em1_name: "الاسم", ph_em_name: "الاسم الكامل", em1_rel: "صلة القرابة", ph_em_rel: "مثال: جدة، خال",
+      em1_phone: "رقم الهاتف",
+      step5: "الأذونات والتوقيع", perm_photo: "أوافق على تصوير الطفل في الأنشطة الداخلية",
+      perm_med: "أوافق على الإسعافات الأولية في الطوارئ",
+      signature: "التوقيع الرقمي للولي", clear_sig: "🗑️ مسح التوقيع",
+      step6: "تأكيد التسجيل", plan: "الباقة المختارة", sel_plan: "اختر باقة",
+      plan_full: "يوم كامل (8 ص - 6 م)", plan_half: "نصف يوم (8 ص - 2 م)",
+      notes: "ملاحظات إضافية", ph_notes: "أي معلومات تود إخبارنا بها...",
+      agree: "أقر بصحة البيانات وبموافقتي على سياسة الحضانة",
+      submit: "🎯 إتمام التسجيل وإرسال (PDF)", prev: "⬅️ السابق", next: "التالي ➡️",
+      langBtn: "English", footer_text: "للاستفسار: تواصل معنا عبر فيسبوك أو زرنا في مقرنا",
+      copyright: "© 2026 وندرلاند للحضانة. جميع الحقوق محفوظة.",
+      err_fill: "يرجى ملء جميع الحقول المطلوبة (*)",
+      err_sign: "يرجى التوقيع في المربع المخصص",      err_terms: "يرجى الموافقة على الشروط",
+      success: "✅ تم تحميل الملف! سيتم فتح الواتساب لإرساله.",
+      years: "سنوات"
+    },
+    en: {
+      subtitle: "Wonderland Kids Academy",
+      fb_link: "Follow us on Facebook", maps_link: "Find us on Maps",
+      step1: "Child Information", fullname: "Full Name", ph_fullname: "Enter child's full name",
+      gender: "Gender", sel_gender: "Select", male: "Male", female: "Female",
+      dob: "Date of Birth", age: "Age", ph_age: "Auto-calculated",
+      nationality: "Nationality", ph_nationality: "e.g., Egyptian",
+      step2: "Parents Information", mother_name: "Mother's Full Name", ph_mother_name: "Full name",
+      mother_phone: "Mother's Phone", father_name: "Father's Full Name", ph_father_name: "Full name",
+      father_phone: "Father's Phone", ph_phone: "01xxxxxxxxx", phone_helper: "11 digits (e.g., 01012345678)",
+      step3: "Medical Information", allergies: "Any Allergies?", ph_allergies: "List allergies or food restrictions",
+      meds: "Regular Medications", ph_meds: "Medication name and dosage",
+      doctor: "Child's Doctor (Name/Phone)", ph_doctor: "Dr. Ahmed - 01012345678",
+      step4: "Emergency Contacts", em_info: "Secondary contact if parents unavailable",
+      em1_name: "Name", ph_em_name: "Full name", em1_rel: "Relationship", ph_em_rel: "e.g., Grandmother, Uncle",
+      em1_phone: "Phone Number",
+      step5: "Permissions & Signature", perm_photo: "I allow photos for internal activities",
+      perm_med: "I allow emergency first aid treatment",
+      signature: "Digital Signature", clear_sig: "🗑️ Clear Signature",
+      step6: "Finalize Registration", plan: "Selected Plan", sel_plan: "Choose a plan",
+      plan_full: "Full Day (8 AM - 6 PM)", plan_half: "Half Day (8 AM - 2 PM)",
+      notes: "Additional Notes", ph_notes: "Any special instructions...",
+      agree: "I confirm all data is correct and accept nursery policy",
+      submit: "🎯 Complete & Send (PDF)", prev: "⬅️ Back", next: "Next ➡️",
+      langBtn: "العربية", footer_text: "Contact us via Facebook or visit our location",
+      copyright: "© 2026 WonderLand Nursery. All rights reserved.",
+      err_fill: "Please fill all required fields (*)",
+      err_sign: "Please provide a signature",
+      err_terms: "Please accept the terms",
+      success: "✅ PDF downloaded! WhatsApp will open to send.",
+      years: "Years"
+    }
+  };
+
+  // 🔹 Initialize Signature Pad
+  const canvas = document.getElementById('sigCanvas');
+  const signaturePad = new SignaturePad(canvas, {
+    minWidth: 1,
+    maxWidth: 2.5,
+    penColor: "#2F3E46"
+  });
+
+  function resizeCanvas() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const isEmpty = signaturePad.isEmpty();
+        canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    
+    const ctx = canvas.getContext("2d");
+    ctx.scale(ratio, ratio);
+    
+    if (!isEmpty) signaturePad.fromData(signaturePad.toData());
+  }
+  window.addEventListener("resize", resizeCanvas);
+  setTimeout(resizeCanvas, 100);
+
+  // 🔹 Language Toggle
+  function toggleLang() {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    const html = document.documentElement;
+    html.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    html.lang = currentLang;
+    
+    document.getElementById('langBtn').textContent = i18n[currentLang].langBtn;
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[currentLang][key]) el.textContent = i18n[currentLang][key];
+    });
+    
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('i18n-placeholder') || el.getAttribute('data-i18n-placeholder');
+      if (i18n[currentLang][key]) el.placeholder = i18n[currentLang][key];
+    });
+    
+    updateAgeDisplay();
+  }
+
+  function updateAgeDisplay() {
+    const dobInput = document.getElementById('dobInput');
+    const ageOutput = document.getElementById('ageOutput');
+    if (!dobInput?.value || !ageOutput) return;
+    
+    const dob = new Date(dobInput.value);
+    if (isNaN(dob)) return;
+    
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+    
+    ageOutput.value = `${age} ${i18n[currentLang].years}`;
+  }
+
+  document.getElementById('dobInput').addEventListener('change', updateAgeDisplay);
+  // 🔹 Navigation
+  function changeStep(direction) {
+    if (direction === 1 && !validateStep()) return;
+    
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+    currentStep += direction;
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+    
+    document.querySelectorAll('.circle').forEach((circle, index) => {
+      circle.classList.toggle('active', index < currentStep);
+    });
+    
+    const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+    
+    document.getElementById('prevBtn').disabled = currentStep === 1;
+    document.getElementById('nextBtn').style.display = currentStep === totalSteps ? 'none' : 'inline-block';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    if (currentStep === 5) setTimeout(resizeCanvas, 100);
+  }
+
+  // 🔹 Validation
+  function validateStep() {
+    const currentStepEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+    const requiredFields = currentStepEl.querySelectorAll('[required]');
+    const t = i18n[currentLang];
+    
+    for (let field of requiredFields) {
+      if (field.type === 'checkbox') {
+        if (!field.checked) { alert(t.err_terms); field.scrollIntoView({behavior: 'smooth', block: 'center'}); return false; }
+      } else if (!field.value.trim()) {
+        alert(t.err_fill);
+        field.focus();
+        field.style.borderColor = 'var(--error)';
+        setTimeout(() => field.style.borderColor = '', 2000);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // 🔹 Submit & Generate PDF + WhatsApp
+  async function submitForm() {
+    const t = i18n[currentLang];
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (signaturePad.isEmpty()) {       alert(t.err_sign); 
+      document.querySelector('.step[data-step="5"]').scrollIntoView({behavior: 'smooth'});
+      return; 
+    }
+    if (!document.querySelector('[name="agree"]').checked) { 
+      alert(t.err_terms); 
+      return; 
+    }
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = currentLang === 'ar' ? '⏳ جاري المعالجة...' : '⏳ Processing...';
+    
+    try {
+      const formData = new FormData(document.getElementById('regForm'));
+      const data = Object.fromEntries(formData.entries());
+      
+      const pdfContent = document.createElement('div');
+      pdfContent.style.padding = '30px';
+      pdfContent.style.fontFamily = 'Segoe UI, Tahoma, sans-serif';
+      pdfContent.innerHTML = `
+        <div style="text-align:center; border-bottom:3px solid #FF6B6B; padding-bottom:20px; margin-bottom:25px;">
+          <h1 style="color:#FF6B6B; margin:0; font-size:1.8rem;">🎠 WonderLand Academy</h1>
+          <p style="color:#666; margin:5px 0 0;">${currentLang === 'ar' ? 'استمارة تسجيل طفل' : 'Child Registration Form'} • ${new Date().toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US')}</p>
+        </div>
+        <div style="background:#f9f9f9; padding:20px; border-radius:12px; margin-bottom:20px;">
+          <h3 style="color:#4ECDC4; margin:0 0 15px;">👶 ${currentLang === 'ar' ? 'بيانات الطفل' : 'Child Information'}</h3>
+          <p><strong>${currentLang === 'ar' ? 'الاسم:' : 'Name:'}</strong> ${data.child_fullname}</p>
+          <p><strong>${currentLang === 'ar' ? 'تاريخ الميلاد:' : 'DOB:'}</strong> ${data.dob} | <strong>${currentLang === 'ar' ? 'العمر:' : 'Age:'}</strong> ${document.getElementById('ageOutput').value}</p>
+          <p><strong>${currentLang === 'ar' ? 'الجنس:' : 'Gender:'}</strong> ${data.gender === 'Male' ? (currentLang === 'ar' ? 'ذكر' : 'Male') : (currentLang === 'ar' ? 'أنثى' : 'Female')}</p>
+        </div>
+        <div style="background:#f9f9f9; padding:20px; border-radius:12px; margin-bottom:20px;">
+          <h3 style="color:#4ECDC4; margin:0 0 15px;">👪 ${currentLang === 'ar' ? 'بيانات الوالدين' : 'Parents'}</h3>
+          <p><strong>👩 ${currentLang === 'ar' ? 'الأم:' : 'Mother:'}</strong> ${data.mother_name} | 📞 ${data.mother_phone}</p>
+          <p><strong>👨 ${currentLang === 'ar' ? 'الأب:' : 'Father:'}</strong> ${data.father_name} | 📞 ${data.father_phone}</p>
+        </div>
+        <div style="background:#f9f9f9; padding:20px; border-radius:12px; margin-bottom:20px;">
+          <h3 style="color:#4ECDC4; margin:0 0 15px;">🚨 ${currentLang === 'ar' ? 'طوارئ' : 'Emergency'}</h3>
+          <p><strong>${data.em1_name}</strong> | ${data.em1_rel} | 📞 ${data.em1_phone}</p>
+        </div>
+        <div style="background:#f9f9f9; padding:20px; border-radius:12px;">
+          <p><strong>📦 ${currentLang === 'ar' ? 'الباقة:' : 'Plan:'}</strong> ${data.plan}</p>
+          ${data.notes ? `<p><strong>📝 ${currentLang === 'ar' ? 'ملاحظات:' : 'Notes:'}</strong> ${data.notes}</p>` : ''}
+        </div>
+        <div style="margin-top:30px; text-align:center;">
+          <p style="margin-bottom:10px;"><strong>${currentLang === 'ar' ? 'التوقيع:' : 'Signature:'}</strong></p>
+          <img src="${signaturePad.toDataURL()}" style="width:220px; border:1px solid #ddd; border-radius:8px;">
+        </div>
+      `;
+      
+      const opt = {        margin: 10,
+        filename: `WonderLand_Reg_${data.child_fullname.replace(/\s+/g, '_')}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      await html2pdf().set(opt).from(pdfContent).save();
+      
+      const successMsg = document.getElementById('successMsg');
+      successMsg.style.display = 'block';
+      successMsg.scrollIntoView({behavior: 'smooth', block: 'center'});
+      
+      const msg = currentLang === 'ar' ? 
+        `📝 *تسجيل جديد - وندرلاند*\n👶 الطفل: ${data.child_fullname}\n🎂 الميلاد: ${data.dob}\n👩 الأم: ${data.mother_name}\n📞 ${data.mother_phone}\n👨 الأب: ${data.father_name}\n📞 ${data.father_phone}\n🚨 طوارئ: ${data.em1_name} | ${data.em1_phone}\n📦 الباقة: ${data.plan}\n\n✅ *تم تحميل ملف PDF*\nيرجى إرفاقه في هذه المحادثة.` :
+        `📝 *New Registration - WonderLand*\n👶 Child: ${data.child_fullname}\n🎂 DOB: ${data.dob}\n👩 Mother: ${data.mother_name}\n📞 ${data.mother_phone}\n👨 Father: ${data.father_name}\n📞 ${data.father_phone}\n🚨 Emergency: ${data.em1_name} | ${data.em1_phone}\n📦 Plan: ${data.plan}\n\n✅ *PDF downloaded*\nPlease attach it to this chat.`;
+      
+      setTimeout(() => {
+        window.open(`https://wa.me/${nurseryPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = t.submit;
+        }, 3000);
+      }, 1500);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      alert(currentLang === 'ar' ? 'حدث خطأ، يرجى المحاولة مرة أخرى' : 'An error occurred. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = t.submit;
+    }
+  }
+
+  // 🔹 Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('progressFill').style.width = '0%';
+    document.querySelectorAll('input[required], select[required]').forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.value.trim()) {
+          this.style.borderColor = 'var(--success)';
+          setTimeout(() => this.style.borderColor = '', 1500);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
